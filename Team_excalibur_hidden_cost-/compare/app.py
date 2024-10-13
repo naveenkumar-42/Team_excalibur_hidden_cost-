@@ -6,6 +6,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+
 def get_flipkart_price(product_titles):
     flipkart_prices = []
     for product_title in product_titles:
