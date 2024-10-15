@@ -6,7 +6,7 @@
  }
 
  body {
-     width: 300px;
+     width:300px;
      padding: 20px;
      background-color: var(--bg-color);
      color: var(--text-color);

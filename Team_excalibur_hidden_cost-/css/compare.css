@@ -22,13 +22,14 @@ body {
   background-color: var(--secondary-bg-color);
 }
 
+
 h1 {
   text-align: center;
   color: var(--text-color);
 }
 
 label {
-  display: block;
+  display: block ;
   margin-bottom: 10px;
   color: var(--text-color);
 }
