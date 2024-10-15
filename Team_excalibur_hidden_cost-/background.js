@@ -72,59 +72,85 @@ function demo(sendResponse) {
     const url = currentTab.url;
 
     console.log('Scraping data from URL:', url);
-    
-    // Fetch data from the server using the URL
-    fetch('http://127.0.0.1:5123/amazon_run', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ url: url })
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log("Response from server:", data);
-      // Extract numeric values from the response
-      const delivery = parseFloat(data['Delivery:'].replace(/[^\d.]/g, ''));
-      const items = parseFloat(data['Items:'].replace(/[^\d.]/g, ''));
-      const orderTotal = parseFloat(data['Order Total:'].replace(/[^\d.]/g, ''));
-      const promotionApplied = parseFloat(data['Promotion Applied:'].replace(/[^\d.]/g, ''));
-      const total = parseFloat(data['Total:'].replace(/[^\d.]/g, ''));
 
-      // Store the values in local Chrome storage
-      chrome.storage.local.set({ 
-        'deliveryAmount': delivery || 0,
-        'itemsAmount': items || 0,
-        'orderTotalAmount': orderTotal || 0,
-        'promotionAppliedAmount': promotionApplied || 0,
-        'totalAmount': total || 0
-      }, function() {
-        if (chrome.runtime.lastError) {
-          console.error('Error storing data:', chrome.runtime.lastError);
-        } else {
-          console.log('Data stored successfully');
-        }
-      });
+    // Check if the URL is from Amazon or Flipkart
+    if (url.includes("amazon")) {
+      fetchAmazonData(url, sendResponse);
+    } else if (url.includes("flipkart")) {
+      fetchFlipkartData(url, sendResponse);
+    } else {
+      sendResponse({ error: "Unsupported URL" });
+    }
+  });
+  return true;
+}
 
-      // Send the values back to the content script if needed
-      sendResponse({ 
-        deliveryAmount: delivery || 0,
-        itemsAmount: items || 0,
-        orderTotalAmount: orderTotal || 0,
-        promotionAppliedAmount: promotionApplied || 0,
-        totalAmount: total || 0
-      });
-       chrome.runtime.reload();
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
-      sendResponse({ error: "An error occurred while fetching data." });
-    });
+// Fetch data from the server using the Amazon URL
+function fetchAmazonData(url, sendResponse) {
+  fetch('http://127.0.0.1:5123/amazon_run', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ url: url })
+  })
+  .then(response => response.json())
+  .then(data => processAndStoreData(data, sendResponse))
+  .catch(error => handleError(error, sendResponse));
+}
+
+// Fetch data from the server using the Flipkart URL
+function fetchFlipkartData(url, sendResponse) {
+  fetch('http://127.0.0.1:5123/flipkart_run', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ url: url })
+  })
+  .then(response => response.json())
+  .then(data => processAndStoreData(data, sendResponse))
+  .catch(error => handleError(error, sendResponse));
+}
+
+// Common function to process and store data
+function processAndStoreData(data, sendResponse) {
+  console.log("Response from server:", data);
+  // Extract numeric values from the response
+  const delivery = parseFloat(data['Delivery:'].replace(/[^\d.]/g, ''));
+  const items = parseFloat(data['Items:'].replace(/[^\d.]/g, ''));
+  const orderTotal = parseFloat(data['Order Total:'].replace(/[^\d.]/g, ''));
+  const promotionApplied = parseFloat(data['Promotion Applied:'].replace(/[^\d.]/g, ''));
+  const total = parseFloat(data['Total:'].replace(/[^\d.]/g, ''));
+
+  // Store the values in local Chrome storage
+  chrome.storage.local.set({ 
+    'deliveryAmount': delivery || 0,
+    'itemsAmount': items || 0,
+    'orderTotalAmount': orderTotal || 0,
+    'promotionAppliedAmount': promotionApplied || 0,
+    'totalAmount': total || 0
+  }, function() {
+    if (chrome.runtime.lastError) {
+      console.error('Error storing data:', chrome.runtime.lastError);
+    } else {
+      console.log('Data stored successfully');
+    }
   });
 
+  // Send the values back to the content script if needed
+  sendResponse({ 
+    deliveryAmount: delivery || 0,
+    itemsAmount: items || 0,
+    orderTotalAmount: orderTotal || 0,
+    promotionAppliedAmount: promotionApplied || 0,
+    totalAmount: total || 0
+  });
+  chrome.runtime.reload();
+}
 
-  
-
-  // Return true to indicate that sendResponse will be called asynchronously
-  return true;
+// Common function to handle errors
+function handleError(error, sendResponse) {
+  console.error('Error fetching data:', error);
+  sendResponse({ error: "An error occurred while fetching data." });
 }

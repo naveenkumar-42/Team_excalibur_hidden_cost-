@@ -27,17 +27,18 @@
 
         /* Font */
         body {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between; /* Add this */
-        height: 70vh; /* Add this */
-        font-family: 'Poppins', sans-serif;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        padding: 20px;
-        width: 500px;
-        margin-left: 30%;
-    }
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 70vh;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 20px;
+            width: 500px;
+            margin-left: 30%;
+            animation: fadeIn 2s ease-in-out;
+        }
 
         h1 {
             display: block;
@@ -47,6 +48,7 @@
             background-color: var(--secondary-bg-color);
             padding: 30px 0px;
             border-radius: 10px;
+            animation: fadeIn 2s ease-in-out;
         }
 
         /* Form */
@@ -54,6 +56,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            animation: fadeIn 2s ease-in-out;
         }
 
         label {
@@ -90,7 +93,7 @@
             font-size: 1.6rem;
             cursor: pointer;
             transition: background-color 0.8s;
-            margin-bottom: 50px;
+            margin-bottom: 20px;
         }
 
         button[type="submit"]:hover {
@@ -98,25 +101,60 @@
             color: var(--main-color);
         }
 
-        .footer{
+        .footer {
             margin-top: 90px;
             text-align: end;
+            animation: fadeIn 2s ease-in-out;
         }
 
+        /* Loading Indicator Styles */
+        .loader {
+            display: none; /* Hidden by default */
+            border: 8px solid rgba(255, 255, 255, 0.2);
+            border-top: 8px solid var(--main-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-top: 20px;
+        }
+
+        /* Spin Animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Keyframes for fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
     <h1>Dark Pattern Detection</h1>
-    <form action="/predict" method="post">
+    <form action="/predict" method="post" onsubmit="showLoader()">
         <label for="website_url">Enter Website URL:</label>
         <input type="text" id="website_url" name="website_url" required>
         <button type="submit">Analyze</button>
+        <div class="loader" id="loader"></div> <!-- Circular loader -->
     </form>
 
     <footer class="footer">
         <p>
-             Visit our Website --><span><a target="_blank" href="https://naveenkumar-42.github.io/DPBH_Web/#home">&#128516;</a></span>
+            Visit our Website --><span><a target="_blank" href="https://sabarishcodewizard.github.io/DPBH-Web-Application/">&#128516;</a></span>
         </p>
     </footer>
+
+    <script>
+        function showLoader() {
+            document.getElementById("loader").style.display = "block"; // Show loader
+        }
+    </script>
 </body>
 </html>

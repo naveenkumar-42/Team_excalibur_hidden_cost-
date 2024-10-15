@@ -1,3 +1,5 @@
+//compare.js
+
 document.addEventListener('DOMContentLoaded', function() {
   var compareButton = document.getElementById('compareButton');
   compareButton.addEventListener('click', function() {
@@ -6,74 +8,100 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function comparePrices() {
-  chrome.storage.local.get(['amazonProductTitles', 'amazonProductPrices'], function (result) {
-    const amazonProductTitles = result.amazonProductTitles;
-    const amazonProductPrices = result.amazonProductPrices;
+  // Show the loading indicator
+  var loadingIndicator = document.getElementById('loadingIndicator');
+  loadingIndicator.style.display = 'block';
 
-    if (!amazonProductTitles || !amazonProductPrices) {
+  chrome.storage.local.get(['amazonProductTitles', 'amazonProductPrices'], function (result) {
+    let amazonProductTitles = result.amazonProductTitles;
+    let amazonProductPrices = result.amazonProductPrices;
+
+    // Filter out any empty product titles
+    amazonProductTitles = amazonProductTitles.filter(title => title.trim() !== "");
+
+    if (!amazonProductTitles.length || !amazonProductPrices.length) {
       alert('Amazon product data is not available. Please set the product title and price.');
+      loadingIndicator.style.display = 'none'; // Hide loading indicator
       return;
     }
+
+    console.log({
+      amazon_product_title: amazonProductTitles,
+      amazon_product_price: amazonProductPrices
+    });
 
     fetch('http://localhost:5010/compare', {
       method: 'POST',
       headers: {
-          'Content-Type': 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         amazon_product_title: amazonProductTitles,
         amazon_product_price: amazonProductPrices
-      }) 
+      })
     })
     .then(response => response.json())
     .then(data => {
+      console.log(data); // Log the response to check what data you are getting
       displayComparison(data);
+      loadingIndicator.style.display = 'none'; // Hide loading indicator after results are displayed
     })
     .catch(error => {
       console.error('Error:', error);
       alert('An error occurred while fetching data. Please try again later.');
+      loadingIndicator.style.display = 'none'; // Hide loading indicator
     });
   });
 }
 
+
+
+
 function displayComparison(data) {
   var resultsDiv = document.getElementById("results");
-  resultsDiv.innerHTML = "";
+  resultsDiv.innerHTML = ""; // Clear previous results
 
-  var flipkartPrices = data.flipkart_prices;
-  var amazonPrices = data.amazon_prices;
-  var comparisonResults = data.comparison_results;
+  var flipkartData = data.flipkart_data || [];
+  var amazonPrices = data.amazon_prices || [];
+  var comparisonResults = data.comparison_results || [];
 
-  // Check if there is any data to display
-  if (flipkartPrices.length === 0 || amazonPrices.length === 0 || comparisonResults.length === 0) {
+  if (flipkartData.length === 0 || amazonPrices.length === 0 || comparisonResults.length === 0) {
     alert("No data available for comparison.");
     return;
   }
 
-  // Display comparison data only once
-  var pricesContainer = document.createElement("div");
-  pricesContainer.classList.add("prices-container");
+  // Loop through the data and display results for each product
+  for (let i = 0; i < flipkartData.length; i++) {
+    let flipkartInfo = flipkartData[i];
 
-  var amazonResult = document.createElement("div");
-  amazonResult.classList.add("result");
-  amazonResult.innerHTML = "<h3>Amazon</h3><p>" + amazonPrices[0] + "</p>";
-  pricesContainer.appendChild(amazonResult);
+    // Display Amazon price
+    var amazonResult = document.createElement("div");
+    amazonResult.classList.add("result");
+    amazonResult.innerHTML = "<h3>Amazon</h3><p>" + amazonPrices[i] + "</p>";
+    resultsDiv.appendChild(amazonResult);
 
-  var flipkartResult = document.createElement("div");
-  flipkartResult.classList.add("result");
-  flipkartResult.innerHTML = "<h3>Flipkart</h3><p>" + flipkartPrices[0] + "</p>";
-  pricesContainer.appendChild(flipkartResult);
+    // Display Flipkart price, MRP, and offer percentage
+    var flipkartResult = document.createElement("div");
+    flipkartResult.classList.add("result");
+    flipkartResult.innerHTML = `
+      <h3>Flipkart</h3>
+      <p>Price: ${flipkartInfo.price}</p>
+      <p>MRP: ${flipkartInfo.mrp}</p>
+      <p>Offer: ${flipkartInfo.offer_percentage}</p>
+    `;
+    resultsDiv.appendChild(flipkartResult);
 
-  resultsDiv.appendChild(pricesContainer);
+    // Calculate price difference
+    var priceDifference = document.createElement("div");
+    priceDifference.classList.add("result");
+    var difference = Math.abs(parseFloat(amazonPrices[i]) - parseFloat(flipkartInfo.price));
+    priceDifference.innerHTML = "<h3>Price Difference</h3><p>" + difference + "</p>";
+    resultsDiv.appendChild(priceDifference);
 
-  var priceDifference = document.createElement("div");
-  priceDifference.classList.add("result");
-  var difference = Math.abs(amazonPrices[0] - flipkartPrices[0]); 
-  priceDifference.innerHTML = "<h3>Price Difference</h3><p>" + difference + "</p>";
-  resultsDiv.appendChild(priceDifference);
-
-  var comparisonMessage = document.createElement("div");
-  comparisonMessage.classList.add("result");
-  comparisonMessage.innerHTML = "<h3 class='compare'>Comparison Result</h3><p>" + comparisonResults[0] + "</p>";
-  resultsDiv.appendChild(comparisonMessage);
+    // Display comparison result
+    var comparisonMessage = document.createElement("div");
+    comparisonMessage.classList.add("result");
+    comparisonMessage.innerHTML = "<h3 class='compare'>Comparison Result</h3><p>" + comparisonResults[i] + "</p>";
+    resultsDiv.appendChild(comparisonMessage);
+  }
 }

@@ -111,10 +111,10 @@ function highlightAmazonProductDetails() {
 
 
 function highlightFlipkartProductDetails() {
-  const productPrices = document.querySelectorAll('#container div._30jeq3._16Jk6d, #container > div > div._1Er18h > div > div._1YokD2._2GoDe3.col-12-12 > div:nth-child(1) > div > div:nth-child(3) > div > div._2nQDXZ > div._3fSRat > span._2-ut7f._1WpvJ7');
-  const productTitles = document.querySelectorAll('#container h1 span.B_NuCI');
-  const fullPrices = document.querySelectorAll('#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div:nth-child(2) > div > div.dyC4hf > div.CEmiEU > div > div._3I9_wc._2p6lqe, #container > div > div._1Er18h > div > div > div:nth-child(1) > div > div:nth-child(3) > div > div._2nQDXZ > div._3fSRat > span._2-ut7f._2xc6hH');
-  const discountPercentages = document.querySelectorAll('#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div:nth-child(2) > div > div.dyC4hf > div.CEmiEU > div > div._3Ay6Sb._31Dcoz, #container > div > div._1Er18h > div > div > div:nth-child(1) > div > div:nth-child(3) > div > div._2nQDXZ > div._3fSRat > span.dML6Ak');
+  const productPrices = document.querySelectorAll('#container > div > div._39kFie.N3De93.JxFEK3._48O0EI > div.DOjaWF.YJG4Cf > div.DOjaWF.gdgoEp.col-8-12 > div:nth-child(3) > div > div.x\+7QT1 > div.UOCQB1 > div > div.Nx9bqj.CxhGGd');
+  const productTitles = document.querySelectorAll('#container > div > div._39kFie.N3De93.JxFEK3._48O0EI > div.DOjaWF.YJG4Cf > div.DOjaWF.gdgoEp.col-8-12 > div:nth-child(3) > div > div:nth-child(1) > h1 > span');
+  const fullPrices = document.querySelectorAll('#container > div > div._39kFie.N3De93.JxFEK3._48O0EI > div.DOjaWF.YJG4Cf > div.DOjaWF.gdgoEp.col-8-12 > div:nth-child(3) > div > div.x\+7QT1 > div.UOCQB1 > div > div.yRaY8j.A6\+E6v');
+  const discountPercentages = document.querySelectorAll('#container > div > div._39kFie.N3De93.JxFEK3._48O0EI > div.DOjaWF.YJG4Cf > div.DOjaWF.gdgoEp.col-8-12 > div:nth-child(3) > div > div.x\+7QT1 > div.UOCQB1 > div > div.UkUFwK.WW8yVX');
   const finalPrices = document.querySelectorAll('#container > div > div._1Er18h > div > div._1YokD2._2GoDe3.col-12-12 > div._1YokD2._3Mn1Gg.col-4-12._78xt5Y > div._1AtVbE.col-12-12 > div > div > div > div._3LxTgx > div > div.z4Ha90 > span > div > div > div.z4Ha90');
 
   highlightElements(productPrices, '#4F6F52', '2px 5px', '3px', 'bold');
@@ -152,14 +152,18 @@ function highlightFlipkartProductDetails() {
 
   chrome.storage.local.set({
     'flipkartProductPrices': Array.from(productPrices).map(price => parseFloat(price.textContent.replace(/,/g, '').replace('₹', ''))),
-    'flipkartProductTitles': Array.from(productTitles).map(title => title.textContent),
+    'flipkartProductTitles': Array.from(productTitles).map(title => title.textContent.trim()),
     'flipkartFullPrices': Array.from(fullPrices).map(price => parseFloat(price.textContent.replace(/,/g, '').replace('₹', '').split('₹')[0])),
-    'flipkartOfferPrices': Array.from(discountPercentages).map(price => parseFloat(price.textContent.replace(/,/g, '').replace('-', ''))),
-    'flipkartPriceDifference': offerPricesArray,
-    'flipkartFinalPrices': Array.from(finalPrices).map(price => price.textContent),
+    'flipkartOfferPrices': offerPricesArray,  // Use the calculated offer prices
     'flipkartComparePrice': flipkartComparePriceArray,
-    'flipkartdiscountDifference': discountDifferenceArray
+    'flipkartDiscountDifference': discountDifferenceArray
   });
+
+  if (productPrices.length && productTitles.length) {
+  highlightElements(productPrices, '#4F6F52', '2px 5px', '3px', 'bold');
+  highlightElements(productTitles, '#BFD8AF', '2px 5px', '3px', 'bold');
+}
+
 }
 
 function highlightAjioProductDetails() {
@@ -390,6 +394,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     let element = document.getElementById("insite_count");
     if (element) {
       sendDarkPatterns(element.value);
-    }
+    } 
   }
 });

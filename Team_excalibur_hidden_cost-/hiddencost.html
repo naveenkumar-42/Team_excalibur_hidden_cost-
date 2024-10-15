@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Highlighter</title>
@@ -8,260 +8,179 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style>
-      :root {
-    --bg-color: #081b29;
-    --secondary-bg-color: #112e42;
-    --text-color: #E0FFFF;
-    --main-color: #00FA9A;
-}
+        :root {
+            --bg-color: #081b29;
+            --secondary-bg-color: #112e42;
+            --text-color: #E0FFFF;
+            --main-color: #00FA9A;
+        }
 
-body {
-    width: 300px;
-    padding: 20px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    border: solid 2px var(--text-color);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+        body {
+            width: 300px;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: solid 2px var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-.popup-container {
-    text-align: center;
-}
+        .popup-container {
+            text-align: center;
+        }
 
-.header {
-    background-color: var(--secondary-bg-color);
-    color: #ffffff;
-    padding: 6px;
-    border-radius: 5px 5px 0 0;
-}
+        .header {
+            background-color: var(--secondary-bg-color);
+            color: #ffffff;
+            padding: 6px;
+            border-radius: 5px 5px 0 0;
+        }
 
-.header h1 {
-    margin: 0;
-}
+        .header h1 {
+            margin: 0;
+        }
 
-.main-content {
-    padding: 20px;
-}
+        .main-content {
+            padding: 20px;
+        }
 
-p {
-    margin: 10px 0;
-}
+        p {
+            margin: 10px 0;
+        }
 
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-}
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
 
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 34px;
-}
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: #fff;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 50%;
-}
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: #fff;
+            transition: .4s;
+            border-radius: 50%;
+        }
 
-input:checked+.slider {
-    background-color: var(--main-color);
-}
+        input:checked+.slider {
+            background-color: var(--main-color);
+        }
 
-input:checked+.slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-}
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
 
-.button-container {
-    margin-top: 20px;
-}
+        .button-container {
+            margin-top: 20px;
+        }
 
-button {
-    margin: 5px;
-    padding: 10px;
-    background-color: var(--main-color);
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        button {
+            margin: 5px;
+            padding: 10px;
+            background-color: var(--main-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-button:hover {
-    background-color: #2980b9;
-}
+        button:hover {
+            background-color: #2980b9;
+        }
 
-.result {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: var(--secondary-bg-color);
-    border: #ccc 1px solid;
-    border-radius: 5px;
-}
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: var(--secondary-bg-color);
+            border: #ccc 1px solid;
+            border-radius: 5px;
+        }
 
-.result h2 {
-    margin-bottom: 10px;
-    font-size: 15px;
-}
+        .result h2 {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
 
-.result h1 {
-    text-decoration: solid;
-    /* color: var(--main-color); */
-    text-size-adjust: 20px;
-    border: 2px solid white;
-}
+        .loader {
+            display: none;
+            border: 8px solid rgba(255, 255, 255, 0.2);
+            border-top: 8px solid var(--main-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-left: 37%;
+            margin-top: 10px;
+        }
 
-
-/* animate */
-
-.text-animate {
-    position: relative;
-
-}
-
-.text-animate h3 {
-    font-size: 25px;
-    font-weight: 700;
-    color: transparent;
-    -webkit-text-stroke: .7px var(--main-color);
-    background-image: -webkit-linear-gradient(var(--main-color));
-    background-image: linear-gradient(var(--main-color), var(--main-color));
-    background-repeat: no-repeat;
-    -webkit-background-clip: text;
-    background-clip: text;
-    background-position: 0 0;
-
-}
-
- .text-animate h3 {
-    animation: homeBgText 6s linear infinite;
-    animation-delay: 2s;
-}
-
- .text-animate h3::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    border-right: 2px solid var(--main-color);
-    z-index: -1;
-}
-
-@keyframes homeBgText {
-
-    0%,
-    10%,
-    100% {
-        background-position: -33rem 0;
-    }
-
-    65%,
-    85% {
-        background-position: 0 0;
-    }
-}
-
-.back_button {
-    font-size: 2.4rem;
-    color: var(--main-color); /* Changed from --bg-color to --main-color */
-    transition: .5s;
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-    z-index: 1;
-    text-decoration: none;
-}
-
-.back_button::before {
-    content: '';
-    position: absolute;
-    margin-top: 2px;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 85%;
-    border-radius: 5px;
-    background: var(--main-color);
-    transform: scaleX(0);
-    transition: .5s;
-    z-index: -1;
-}
-
-.back_button:hover {
-    color: var(--bg-color); /* Changed from --main-color to --bg-color */
-}
-
-.back_button:hover::before {
-    transform: scaleX(1);
-}
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <a class="back_button" href="popup.html"><i class='bx bx-left-arrow-alt'></i></a>
     <div class="popup-container">
-      <div class="header">
-        <div class="text-animate">
-        <h3>Hidden Cost Identifier</h3>
-      </div>
-      </div>
-      <div class="main-content">
-        <p>Toggle highlighting and Scrape for products:</p>
-        <label class="switch">
-            <input type="checkbox" id="toggleHighlightingCheckbox">
-
-          <span class="slider"></span>
-        </label>
-      </div>
-      <!-- HTML elements to display values -->
-      <div class="result" id="result_section" >
-    <p id="amazonFullPrice"></p>
-    <p id="amazonProductPrices"></p>
-    <p id="amazonPriceDifference"></p>
-    <p id="amazonProductPrice"></p>
-    <p id="deliveryAmount"></p>
-    <p id="orderTotalAmount"></p>
-    <p id="discountDifference"></p>
-    <p id="amazontotalHiddenCost"></p>
-    <p id="amazonComparePrice"></p>
-    <p id="flipkartFullPrices"></p>
-    <p id="flipkartOfferPrices"></p>
-    <p id="flipkartPriceDifference"></p>
-    <p id="flipkartdiscountDifference"></p>
-    <p id="flipkartComparePrice"></p>
-    <p id="ajioFullPrice"></p>
-    <p id="ajioOfferPrice"></p>
-    <p id="ajioPriceDifference"></p>
-    <p id="ajiodiscountDifference"></p>
-    <p id="ajioComparePrice"></p>
-
+        <div class="header">
+            <h3>Hidden Cost Identifier</h3>
+        </div>
+        <div class="main-content">
+            <p>Toggle highlighting and scrape for products:</p>
+            <label class="switch">
+                <input type="checkbox" id="toggleHighlightingCheckbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+        
+        <div class="loader-container"></div>
+        <div class="result" id="result_section">
+            <div class="loader" id="loader"></div>
+            <p id="amazonFullPrice"></p>
+            <p id="amazonProductPrices"></p>
+            <p id="amazonPriceDifference"></p>
+            <p id="amazonProductPrice"></p>
+            <p id="deliveryAmount"></p>
+            <p id="orderTotalAmount"></p>
+            <p id="discountDifference"></p>
+            <p id="amazontotalHiddenCost"></p>
+            <p id="amazonComparePrice"></p>
+            <p id="flipkartFullPrices"></p>
+            <p id="flipkartOfferPrices"></p>
+            <p id="flipkartPriceDifference"></p>
+            <p id="flipkartdiscountDifference"></p>
+            <p id="flipkartComparePrice"></p>
+            <p id="ajioFullPrice"></p>
+            <p id="ajioOfferPrice"></p>
+            <p id="ajioPriceDifference"></p>
+            <p id="ajiodiscountDifference"></p>
+            <p id="ajioComparePrice"></p>
+        </div>
     </div>
 
     <script src="hiddencost.js"></script>
-  </body>
+</body>
 </html>
