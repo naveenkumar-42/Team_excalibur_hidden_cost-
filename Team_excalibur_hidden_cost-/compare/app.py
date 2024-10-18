@@ -5,7 +5,7 @@ import time
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-# Define Flask app instance
+
 app = Flask(__name__)  
 CORS(app)
 
