@@ -1,0 +1,216 @@
+:root {
+  --bg-color: #081b29;
+  --secondary-bg-color: #112e42;
+  --text-color: #E0FFFF;
+  --main-color: #00FA9A;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: #E0FFFF solid 2px;
+  padding-right: 10px;
+  padding-left: 10px;
+  height: auto;
+  width: 350px;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  color: var(--text-color);
+  text-decoration: none;
+  border-radius: 5px;
+  margin: 10px;
+  margin-left: 50%;
+}
+
+.heading {
+  text-align: center;
+  margin-top: 40px;
+  padding: 12px;
+  margin-bottom: 40px;
+  color: var(--main-color);
+  background-color: var(--secondary-bg-color);
+}
+
+
+.button:hover {
+  background-color: var(--secondary-bg-color);
+}
+
+.btn-box {
+  list-style-type: none;
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: 13px;
+  cursor: pointer;
+  align-items: center;
+  font-weight: bold;
+}
+
+.btn-box .btn {
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  font-weight: bold;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 55%;
+  height: 30%;
+  padding: 10px 20px 10px 20px;
+  background: var(--main-color);
+  border: .2rem solid var(--main-color);
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .1rem;
+  color: var(--bg-color);
+  z-index: 1;
+  transition: .5s;
+  text-decoration: none;
+  margin: 10px;
+  margin-left: 0px;
+}
+
+.btn-box .btn:nth-child(2),
+.btn-box .btn:nth-child(3) {
+  background-color: transparent;
+  color: var(--main-color);
+}
+
+.btn-box .btn:nth-child(2)::before {
+  background: var(--main-color);
+}
+
+.btn-box .btn:nth-child(2):hover {
+  color: var(--bg-color);
+
+}
+
+.btn-box .btn:hover {
+  color: var(--main-color);
+
+}
+
+.btn-box .btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--bg-color);
+  z-index: -1;
+  transition: .5s;
+}
+
+.btn-box .btn:hover::before {
+  width: 100%;
+}
+
+.btn-box.btns {
+  display: inline-block;
+  width: 15rem;
+}
+
+.btn-box.btns a::before {
+  background: var(--secondary-bg-color);
+}
+
+h2 {
+  color: var(--main-color);
+  background-color: var(--secondary-bg-color);
+  padding: 10px;
+}
+
+.footer {
+  text-align: end;
+}
+
+.up_box {
+  margin: 10px;
+  padding: 10px;
+  margin-left: 0px;
+}
+
+.down_box {
+  margin: 10px;
+  padding: 10px;
+}
+
+h1 {
+  margin: 0;
+  padding-bottom: 6rem;
+  grid-column: 1;
+  grid-row: 1;
+  z-index: 1;
+  font-family: 'Teko', sans-serif;
+  text-transform: uppercase;
+  animation: glow 1s ease-in-out infinite alternate;
+  text-align: center;
+  text-shadow: #00FA9A;
+}
+
+a {
+  font-family: 'Teko', sans-serif;
+  color: #4db1bc;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+  justify-self: center;
+  padding-bottom: 1rem;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 20px #2d9da9;
+  }
+
+  to {
+    text-shadow: 0 0 30px #34b3c1, 0 0 10px #4dbbc7;
+  }
+}
+
+
+/* Logout Button Styling */
+#logout-button {
+  display: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #FF4500;
+  /* Red-orange color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#logout-button:hover {
+  background-color: #e34200;
+  /* Slightly darker red-orange */
+  transform: translateY(-2px);
+}
+
+#logout-button:active {
+  background-color: #c13b00;
+  /* Even darker red-orange */
+  transform: translateY(0);
+}
+
+/* Center the logout button */
+#user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#welcome-message {
+  font-size: 18px;
+  margin-bottom: 10px;
+}

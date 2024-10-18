@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Pattern Detection</title>
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            border: none;
+            outline: none;
+        }
+
+        /* Root variables */
+        :root {
+            --bg-color: #081b29;
+            --secondary-bg-color: #112e42;
+            --text-color: #E0FFFF;
+            --main-color: #00FA9A;
+            --button-bg-color: #00FA9A;
+        }
+
+        /* Font */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 70vh;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 20px;
+            width: 500px;
+            margin-left: 30%;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+
+
+        /* Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        label {
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+            margin-top: 0;
+            margin-right: 225px;
+            color: var(--text-color);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            font-size: 1.2rem;
+            background-color: var(--secondary-bg-color);
+            color: var(--text-color);
+            border: 2px solid var(--main-color);
+            border-radius: 6px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--button-bg-color);
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: var(--button-bg-color);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 6px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: background-color 0.8s;
+            margin-bottom: 20px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: var(--secondary-bg-color);
+            color: var(--main-color);
+        }
+
+        .footer {
+            margin-top: 90px;
+            text-align: end;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Loading Indicator Styles */
+        .loader {
+            display: none;
+            /* Hidden by default */
+            border: 8px solid rgba(255, 255, 255, 0.2);
+            border-top: 8px solid var(--main-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-top: 20px;
+        }
+
+        /* Spin Animation */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Keyframes for fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* animate */
+
+        .text-animate {
+            position: relative;
+
+        }
+
+        .text-animate h1 {
+            font-size: 25px;
+            font-weight: 700;
+            color: transparent;
+            -webkit-text-stroke: .7px var(--main-color);
+            background-image: -webkit-linear-gradient(var(--main-color));
+            background-image: linear-gradient(var(--main-color), var(--main-color));
+            background-repeat: no-repeat;
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-position: 0 0;
+            text-align: center;
+
+        }
+
+        .text-animate h1 {
+            animation: homeBgText 6s linear infinite;
+            animation-delay: 2s;
+        }
+
+        .text-animate h1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            border-right: 2px solid var(--main-color);
+            z-index: -1;
+        }
+
+        @keyframes homeBgText {
+
+            0%,
+            10%,
+            100% {
+                background-position: -33rem 0;
+            }
+
+            65%,
+            85% {
+                background-position: 0 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="text-animate">
+        <h1>Dark Pattern Detection</h1>
+    </div>
+    <form action="/predict" method="post" onsubmit="showLoader()">
+        <label for="website_url">Enter Website URL:</label>
+        <input type="text" id="website_url" name="website_url" required>
+        <button type="submit">Analyze</button>
+        <div class="loader" id="loader"></div> <!-- Circular loader -->
+    </form>
+
+    <footer class="footer">
+        <p>
+            Visit our Website --><span><a target="_blank"
+                    href="https://sabarishcodewizard.github.io/DPBH-Web-Application/">&#128516;</a></span>
+        </p>
+    </footer>
+
+    <script>
+        function showLoader() {
+            document.getElementById("loader").style.display = "block"; // Show loader
+        }
+    </script>
+    <script src="firebase/crypto-js.min.js"></script>
+</body>
+
+</html>

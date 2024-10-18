@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Highlighter</title>
+    <link rel="stylesheet" href="./css/hiddencost.css" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+      :root {
+    --bg-color: #081b29;
+    --secondary-bg-color: #112e42;
+    --text-color: #E0FFFF;
+    --main-color: #00FA9A;
+}
+
+body {
+    width: 300px;
+    padding: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: solid 2px var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.popup-container {
+    text-align: center;
+}
+
+.header {
+    background-color: var(--secondary-bg-color);
+    color: #ffffff;
+    padding: 6px;
+    border-radius: 5px 5px 0 0;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+p {
+    margin: 10px 0;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #fff;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: var(--main-color);
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+button {
+    margin: 5px;
+    padding: 10px;
+    background-color: var(--main-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: var(--secondary-bg-color);
+    border: #ccc 1px solid;
+    border-radius: 5px;
+}
+
+.result h2 {
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.result h1 {
+    text-decoration: solid;
+    /* color: var(--main-color); */
+    text-size-adjust: 20px;
+    border: 2px solid white;
+}
+
+
+/* animate */
+
+.text-animate {
+    position: relative;
+
+}
+
+.text-animate h3 {
+    font-size: 25px;
+    font-weight: 700;
+    color: transparent;
+    -webkit-text-stroke: .7px var(--main-color);
+    background-image: -webkit-linear-gradient(var(--main-color));
+    background-image: linear-gradient(var(--main-color), var(--main-color));
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-position: 0 0;
+
+}
+
+ .text-animate h3 {
+    animation: homeBgText 6s linear infinite;
+    animation-delay: 2s;
+}
+
+ .text-animate h3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    border-right: 2px solid var(--main-color);
+    z-index: -1;
+}
+
+@keyframes homeBgText {
+
+    0%,
+    10%,
+    100% {
+        background-position: -33rem 0;
+    }
+
+    65%,
+    85% {
+        background-position: 0 0;
+    }
+}
+
+.back_button {
+    font-size: 2.4rem;
+    color: var(--main-color); /* Changed from --bg-color to --main-color */
+    transition: .5s;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    z-index: 1;
+    text-decoration: none;
+}
+
+.back_button::before {
+    content: '';
+    position: absolute;
+    margin-top: 2px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 85%;
+    border-radius: 5px;
+    background: var(--main-color);
+    transform: scaleX(0);
+    transition: .5s;
+    z-index: -1;
+}
+
+.back_button:hover {
+    color: var(--bg-color); /* Changed from --main-color to --bg-color */
+}
+
+.back_button:hover::before {
+    transform: scaleX(1);
+}
+    </style>
+  </head>
+  <body>
+    <a class="back_button" href="popup.html"><i class='bx bx-left-arrow-alt'></i></a>
+    <div class="popup-container">
+      <div class="header">
+        <div class="text-animate">
+        <h3>Hidden Cost Identifier</h3>
+      </div>
+      </div>
+      <div class="main-content">
+        <p>Toggle highlighting and Scrape for products:</p>
+        <label class="switch">
+            <input type="checkbox" id="toggleHighlightingCheckbox">
+
+          <span class="slider"></span>
+        </label>
+      </div>
+      <!-- HTML elements to display values -->
+      <div class="result" id="result_section" >
+    <p id="amazonFullPrice"></p>
+    <p id="amazonProductPrices"></p>
+    <p id="amazonPriceDifference"></p>
+    <p id="amazonProductPrice"></p>
+    <p id="deliveryAmount"></p>
+    <p id="orderTotalAmount"></p>
+    <p id="discountDifference"></p>
+    <p id="amazontotalHiddenCost"></p>
+    <p id="amazonComparePrice"></p>
+    <p id="flipkartFullPrices"></p>
+    <p id="flipkartOfferPrices"></p>
+    <p id="flipkartPriceDifference"></p>
+    <p id="flipkartdiscountDifference"></p>
+    <p id="flipkartComparePrice"></p>
+    <p id="ajioFullPrice"></p>
+    <p id="ajioOfferPrice"></p>
+    <p id="ajioPriceDifference"></p>
+    <p id="ajiodiscountDifference"></p>
+    <p id="ajioComparePrice"></p>
+
+    </div>
+
+    <script src="hiddencost.js"></script>
+  </body>
+</html>
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const toggleHighlightingCheckbox = document.getElementById('toggleHighlightingCheckbox');
+  if (toggleHighlightingCheckbox) {
+    chrome.storage.local.get(['isHighlighting'], function (result) {
+      const isHighlighting = result.isHighlighting ?? true;
+      toggleHighlightingCheckbox.checked = isHighlighting;
+      if (isHighlighting) {
+        fetchAndDisplayValues();
+      } else {
+        hideAllValues();
+        chrome.runtime.sendMessage({ action: 'setIcon', path: 'images/default.png' }); // Set icon to default
+      }
+    });
+
+    toggleHighlightingCheckbox.addEventListener('change', function () {
+      const isHighlighting = toggleHighlightingCheckbox.checked;
+      chrome.runtime.sendMessage({ action: 'toggleHighlighting', isHighlighting });
+      chrome.storage.local.set({ isHighlighting });
+      if (isHighlighting) {
+        fetchAndDisplayValues();
+      } else {
+        hideAllValues();
+        chrome.runtime.sendMessage({ action: 'setIcon', path: 'images/default.png' }); // Set icon to default
+      }
+    });
+  } else {
+    console.error("Checkbox element not found.");
+  }
+});
+
+
+
+
+function fetchAndDisplayValues() {
+  const amazonElements = ['amazonFullPrice', 'amazonProductPrices', 'amazonPriceDifference', 'discountDifference', 'amazonComparePrice','deliveryAmount','orderTotalAmount'];
+  const flipkartElements = ['flipkartFullPrices', 'flipkartOfferPrices', 'flipkartPriceDifference', 'flipkartdiscountDifference', 'flipkartComparePrice'];
+  const ajioElements = ['ajioFullPrice', 'ajioDiscountPrices', 'ajioPriceDifference', 'ajiodiscountDifference', 'ajioComparePrice'];
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    const url = tabs[0].url;
+    let selectedPlatform = '';
+    if (url.includes('amazon')) {
+      selectedPlatform = 'amazon';
+    } else if (url.includes('flipkart')) {
+      selectedPlatform = 'flipkart';
+    } else if (url.includes('ajio')) {
+      selectedPlatform = 'ajio';
+    } else {
+      chrome.runtime.sendMessage({ action: 'setIcon', path: 'images/default.png' });
+      return; // Early return to avoid unnecessary processing
+    }
+    
+    toggleElementsDisplay([...amazonElements, ...flipkartElements, ...ajioElements], 'none'); // Combine arrays and hide all elements
+
+    chrome.storage.local.get([
+    'amazonPriceDifference', 'amazonFullPrice', 'amazonProductPrices', 'discountDifference','deliveryAmount','orderTotalAmount', 'flipkartPriceDifference',
+    'flipkartFullPrices', 'flipkartOfferPrices', 'flipkartdiscountDifference', 'amazonComparePrice', 'flipkartComparePrice',
+    'ajioPriceDifference', 'ajioFullPrice', 'ajioDiscountPrices', 'ajiodiscountDifference', 'ajioComparePrice'
+  ], function (result) {
+      if (selectedPlatform === 'amazon') {
+        displayAmazonValues(result);
+      } else if (selectedPlatform === 'flipkart') {
+        displayFlipkartValues(result);
+      } else if (selectedPlatform === 'ajio') {
+        displayAjioValues(result);
+      }
+    });
+  });
+}
+
+function displayAmazonValues(result) {
+  const amazonElements = ['amazonFullPrice', 'amazonProductPrices', 'amazonPriceDifference', 'discountDifference', 'amazonComparePrice', 'deliveryAmount','orderTotalAmount'];
+  document.getElementById('amazonFullPrice').innerHTML = '<h2>Amazon Full Price:</h2><p>₹' + result.amazonFullPrice.join(', ') + '</p>';
+  document.getElementById('amazonProductPrices').innerHTML = '<h2>Amazon Displayed Prices:</h2><p>₹' + result.amazonProductPrices.join(', ') + '</p>';
+  document.getElementById('amazonPriceDifference').innerHTML = '<h2>Amazon Price Difference:</h2><p>₹' + result.amazonPriceDifference.join(', ') + '</p>';
+  document.getElementById('discountDifference').innerHTML = '<h2>Amazon Discount Difference:</h2><p>₹' + result.discountDifference.join(', ') + '</p>';
+  document.getElementById('deliveryAmount').innerHTML = '<h2>Amazon Delivery Amount:</h2><p>₹' + (result.deliveryAmount || 'N/A') + '</p>';
+  document.getElementById('orderTotalAmount').innerHTML = '<h2>Amazon Total Amount:</h2><p>₹' + (result.orderTotalAmount || 'N/A') + '</p>';
+  document.getElementById('amazonComparePrice').innerHTML = '<h1>' + result.amazonComparePrice.join(', ') + '</h1>';
+  updateIconAndTextColor(result.amazonComparePrice, 'amazonComparePrice');
+  toggleElementsDisplay(amazonElements, 'block');
+  hideElements(['flipkartFullPrices', 'flipkartOfferPrices', 'flipkartPriceDifference', 'flipkartdiscountDifference', 'flipkartComparePrice','ajioFullPrice', 'ajioDiscountPrices', 'ajioPriceDifference', 'ajiodiscountDifference', 'ajioComparePrice']);
+}
+
+function displayFlipkartValues(result) {
+  const flipkartElements = ['flipkartFullPrices', 'flipkartOfferPrices', 'flipkartPriceDifference', 'flipkartdiscountDifference', 'flipkartComparePrice'];
+  document.getElementById('flipkartFullPrices').innerHTML = '<h2>Flipkart Full Price:</h2><p>' + result.flipkartFullPrices.join(', ') + '</p>';
+  document.getElementById('flipkartOfferPrices').innerHTML = '<h2>Flipkart Offer Prices:</h2><p>' + result.flipkartOfferPrices.join(', ') + '% </p>';
+  document.getElementById('flipkartPriceDifference').innerHTML = '<h2>Flipkart Price Difference:</h2><p>' + result.flipkartPriceDifference.join(', ') + '</p>';
+  document.getElementById('flipkartdiscountDifference').innerHTML = '<h2>Flipkart Discount Difference:</h2><p>' + result.flipkartdiscountDifference.join(', ') + '</p>';
+  document.getElementById('flipkartComparePrice').innerHTML = '<h1>' + result.flipkartComparePrice.join(', ') + '</h1>';
+  updateIconAndTextColor(result.flipkartComparePrice, 'flipkartComparePrice');
+  toggleElementsDisplay(flipkartElements, 'block');
+  hideElements(['amazonFullPrice', 'amazonProductPrices', 'amazonPriceDifference', 'discountDifference', 'deliveryAmount','amazonProductTotal', 'amazonComparePrice','orderTotalAmount','ajioFullPrice', 'ajioDiscountPrices', 'ajioPriceDifference', 'ajiodiscountDifference', 'ajioComparePrice']);
+}
+
+function dissplayAjioValue(result) {
+   const ajioElements = ['ajioFullPrice', 'ajioDiscountPrices', 'ajioPriceDifference', 'ajiodiscountDifference', 'ajioComparePrice'];
+  document.getElementById('ajioFullPrice').innerHTML = '<h2>Ajio Full Price:</h2><p>' + result.ajioFullPrice.join(', ') + '</p>';
+  document.getElementById('ajioDiscountPrices').innerHTML = '<h2>Ajio Discount Prices:</h2><p>' + result.ajioDiscountPrices.join(', ') + '% </p>';
+  document.getElementById('ajioPriceDifference').innerHTML = '<h2>Ajio Price Difference:</h2><p>' + result.ajioPriceDifference.join(', ') + '</p>';
+  document.getElementById('ajiodiscountDifference').innerHTML = '<h2>Ajio Discount Difference:</h2><p>' + result.ajiodiscountDifference.join(', ') + '</p>';
+  document.getElementById('ajioComparePrice').innerHTML = '<h1>' + result.ajioComparePrice.join(', ') + '</h1>';
+  updateIconAndTextColor(result.ajioComparePrice, 'ajioComparePrice');
+  toggleElementsDisplay(ajioElements, 'block');
+  hideElements(['amazonFullPrice', 'amazonProductPrices', 'amazonPriceDifference', 'discountDifference', 'amazonComparePrice','deliveryAmount','orderTotalAmount', 'flipkartFullPrices', 'flipkartOfferPrices', 'flipkartPriceDifference', 'flipkartdiscountDifference', 'flipkartComparePrice']);``
+}
+
+function updateIconAndTextColor(prices, elementId) {
+  const element = document.getElementById(elementId);
+  element.innerHTML = '<h1>' + prices.join(', ') + '</h1>';
+  if (prices.some(price => price.includes('no'))) {
+    element.style.color = '#00FA9A';
+    chrome.runtime.sendMessage({ action: 'setIcon', path: 'images/green.png' });
+  } else if (prices.some(price => !price.includes('no'))) {
+    element.style.color = 'red';
+    chrome.runtime.sendMessage({ action: 'setIcon', path: 'images/red.png' });
+  }
+}
+
+function hideAllValues() {
+  const allElements = ['amazonFullPrice', 'amazonProductPrices', 'amazonPriceDifference', 'discountDifference', 'amazonComparePrice','deliveryAmount','orderTotalAmount',
+    'flipkartFullPrices', 'flipkartOfferPrices', 'flipkartPriceDifference', 'flipkartdiscountDifference', 'flipkartComparePrice',
+    'ajioFullPrice', 'ajioDiscountPrices', 'ajioPriceDifference', 'ajiodiscountDifference', 'ajioComparePrice'];
+  toggleElementsDisplay(allElements, 'none');
+}
+
+
+function toggleElementsDisplay(elementIds, display) {
+  elementIds.forEach((id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.style.display = display;
+    }
+  });
+}
+
+function hideElements(elementIds) {
+  toggleElementsDisplay(elementIds, 'none');
+}
+
+let backButton = document.querySelector('.back_button');
+
+backButton.addEventListener('click', function () {
+  chrome.runtime.sendMessage({ action: 'backButtonClicked' });
+});
+
+
+window.onload = function () {
+  chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, { message: "popup_open" });
+  });
+
+  document.getElementsByClassName("analyze-button")[0].onclick = function () {
+    chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, { message: "analyze_site" });
+    });
+  };
+
+  document.getElementsByClassName("link")[0].onclick = function () {
+    chrome.tabs.create({
+      url: document.getElementsByClassName("link")[0].getAttribute("href"),
+    });
+  };
+};
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.message === "update_current_count") {
+    document.getElementsByClassName("number")[0].textContent = (request.count/10).toFixed(0);
+  }
+});
+
+document.querySelector('.analyze-button').addEventListener('click', function () {
+  document.querySelector('.number').textContent = 'Detecting...';
+});
+
+
+

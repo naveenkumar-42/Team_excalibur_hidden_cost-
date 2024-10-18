@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+
+  <link rel="stylesheet" href="./css/popup.css">
+</head>
+
+<body>
+  <div class="auth-container">
+    <div class="text-animate">
+      <h3>Register</h3>
+    </div>
+
+    <form id="register-form">
+      <input type="email" id="register-email" placeholder="Email" required />
+      <input type="password" id="register-password" placeholder="Password" required />
+      <input type="password" id="confirm-password" placeholder="Confirm Password" required />
+      <button type="submit">Register</button>
+    </form>
+
+    <p>Already have an account? <a href="login.html">Login</a></p>
+  </div>
+
+  <script src="firebase/firebase-app-compat.js"></script>
+  <script src="firebase/firebase-auth-compat.js"></script>
+  <script src="firebase/firebase-firestore-compat.js"></script>
+  <script src="loadEnv.js"></script>
+  <script src="firebase-init.js"></script>
+  <script src="firebase/crypto-js.min.js"></script>
+  <script src="auth.js"></script>
+  <style>
+    form {
+      margin: 20px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    /* animate */
+
+    .text-animate {
+      position: relative;
+
+    }
+
+    .text-animate h3 {
+      font-size: 25px;
+      font-weight: 700;
+      color: transparent;
+      -webkit-text-stroke: .7px var(--main-color);
+      background-image: -webkit-linear-gradient(var(--main-color));
+      background-image: linear-gradient(var(--main-color), var(--main-color));
+      background-repeat: no-repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      background-position: 0 0;
+      text-align: center;
+
+    }
+
+    .text-animate h3 {
+      animation: homeBgText 6s linear infinite;
+      animation-delay: 2s;
+    }
+
+    .text-animate h3::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      border-right: 2px solid var(--main-color);
+      z-index: -1;
+    }
+    .text-animate h3::before {
+      animation: homeCursorText 6s linear infinite;
+      animation-delay: 2s;
+    }
+    @keyframes homeBgText {
+
+      0%,
+      10%,
+      100% {
+        background-position: -33rem 0;
+      }
+
+      65%,
+      85% {
+        background-position: 0 0;
+      }
+    }
+
+
+
+    @keyframes homeCursorText {
+
+      0%,
+      10%,
+      100% {
+        width: 0;
+      }
+ 
+      65%,
+      78%,
+      85% {
+        width: 100%;
+        opacity: 1;
+      }
+
+      75%,
+      81% {
+        opacity: 0;
+      }
+    }
+  </style>
+  
+</body>
+
+</html>

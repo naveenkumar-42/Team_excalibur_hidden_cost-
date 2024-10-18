@@ -1,0 +1,67 @@
+<!-- popup.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="./css/popup.css">
+
+</head>
+
+<body>
+    <div id="user-info">
+        <p id="welcome-message"></p>
+        <button id="logout-button" style="display:none;">Logout</button>
+    </div>
+    <h1 class="heading">Welcome to our Extension</h1>
+    <p>This extension empowers you to recognize and avoid deceptive design techniques known as dark patterns commonly
+        found on e-commerce websites.</p>
+
+    <div class="btn-box">
+        <div class="up_box">
+            <a class="btn" href="hiddencost.html">Identify Hidden Costs</a>
+            <a id="submitUrl" style="height: 50px;" class="btn">Darkpattern Detector</a>
+        </div>
+        <div class="down">
+            <a class="btn" href="./compare.html">Compare the Product</a>
+            <a class="btn" href="./darkhighlight.html">Highlight Deceptive Tactics</a>
+
+        </div>
+    </div>
+    <div class="btn-box">
+        <a class="btn" style="height: 50px;width: 60px;margin-top:-10px;margin-right: 15px;" href="chatbot.html">Chatter
+            bot</a>
+    </div>
+
+    <!-- Additional Content -->
+    <!-- <div class="additional-content">
+        <h2>About Dark Patterns</h2>
+        <p>Dark patterns are manipulative user interface designs crafted to trick users into doing things they might not
+            want to do, such as making purchases or signing up for subscriptions unknowingly.</p>
+        <p>Our extension helps you stay informed and make informed decisions while shopping online, protecting you from
+            falling victim to these unethical practices.</p>
+    </div> -->
+
+    <footer class="footer">
+
+        <a class="btn" style="height: 50px;width: 100px;margin-top:-10px;margin-right: 15px;"
+            href="feedback.html">Feedback</a>
+        <p>
+            Visit our Website --><span><a target="_blank"
+                    href="https://sabarishcodewizard.github.io/DPBH-Web-Application/">&#128516;</a></span>
+        </p>
+    </footer>
+</body>
+<script src="firebase/firebase-app-compat.js"></script>
+<script src="firebase/firebase-auth-compat.js"></script>
+<script src="firebase/firebase-firestore-compat.js"></script>
+<script src="loadEnv.js"></script>
+<script src="firebase-init.js"></script>
+<script src="auth.js"></script>
+<script src="popup.js"></script>
+<script src="firebase/crypto-js.min.js"></script>
+
+</html>

@@ -111,10 +111,10 @@ function highlightAmazonProductDetails() {
 
 
 function highlightFlipkartProductDetails() {
-  const productPrices = document.querySelectorAll('#container > div > div._39kFie.N3De93.JxFEK3._48O0EI > div.DOjaWF.YJG4Cf > div.DOjaWF.gdgoEp.col-8-12 > div:nth-child(3) > div > div.x\+7QT1 > div.UOCQB1 > div > div.Nx9bqj.CxhGGd');
-  const productTitles = document.querySelectorAll('#container > div > div._39kFie.N3De93.JxFEK3._48O0EI > div.DOjaWF.YJG4Cf > div.DOjaWF.gdgoEp.col-8-12 > div:nth-child(3) > div > div:nth-child(1) > h1 > span');
-  const fullPrices = document.querySelectorAll('#container > div > div._39kFie.N3De93.JxFEK3._48O0EI > div.DOjaWF.YJG4Cf > div.DOjaWF.gdgoEp.col-8-12 > div:nth-child(3) > div > div.x\+7QT1 > div.UOCQB1 > div > div.yRaY8j.A6\+E6v');
-  const discountPercentages = document.querySelectorAll('#container > div > div._39kFie.N3De93.JxFEK3._48O0EI > div.DOjaWF.YJG4Cf > div.DOjaWF.gdgoEp.col-8-12 > div:nth-child(3) > div > div.x\+7QT1 > div.UOCQB1 > div > div.UkUFwK.WW8yVX');
+  const productPrices = document.querySelectorAll('#container > div > div._39kFie.N3De93.JxFEK3._48O0EI > div.DOjaWF.YJG4Cf > div.DOjaWF.gdgoEp.col-8-12 > div:nth-child(2) > div > div.x\+7QT1 > div.UOCQB1 > div > div.Nx9bqj.CxhGGd');
+  const productTitles = document.querySelectorAll('#container > div > div._39kFie.N3De93.JxFEK3._48O0EI > div.DOjaWF.YJG4Cf > div.DOjaWF.gdgoEp.col-8-12 > div:nth-child(2) > div > div:nth-child(1) > h1 > span');
+  const fullPrices = document.querySelectorAll('#container > div > div._39kFie.N3De93.JxFEK3._48O0EI > div.DOjaWF.YJG4Cf > div.DOjaWF.gdgoEp.col-8-12 > div:nth-child(2) > div > div.x\+7QT1 > div.UOCQB1 > div > div.yRaY8j.A6\+E6v');
+  const discountPercentages = document.querySelectorAll('#container > div > div._39kFie.N3De93.JxFEK3._48O0EI > div.DOjaWF.YJG4Cf > div.DOjaWF.gdgoEp.col-8-12 > div:nth-child(2) > div > div.x\+7QT1 > div.UOCQB1 > div > div.UkUFwK.WW8yVX > span');
   const finalPrices = document.querySelectorAll('#container > div > div._1Er18h > div > div._1YokD2._2GoDe3.col-12-12 > div._1YokD2._3Mn1Gg.col-4-12._78xt5Y > div._1AtVbE.col-12-12 > div > div > div > div._3LxTgx > div > div.z4Ha90 > span > div > div > div.z4Ha90');
 
   highlightElements(productPrices, '#4F6F52', '2px 5px', '3px', 'bold');

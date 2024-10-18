@@ -1,0 +1,154 @@
+:root {
+    --bg-color: #081b29;
+    --secondary-bg-color: #112e42;
+    --text-color: #E0FFFF;
+    --main-color: #00FA9A;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 24px;
+    min-height: 180;
+    width: 296px;
+    color: #FFFFFF;
+    background-color: #041F30;
+    border: #D8D8D8 solid 2px;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: 500;
+    margin: 0;
+}
+
+p {
+    font-size: 14px;
+}
+
+button {
+    background-color: #4BE680;
+    border: none;
+    font-size: 16px;
+    padding: 12px 12px;
+    margin: 8px 8px 8px 8px;
+    border-radius: 3px;
+    box-shadow: 0px 3px 2px 1px #00131f;
+    width: 100%;
+    transition: background-color 0.2s ease;
+}
+
+.text-animate{
+    align-items: center;
+    text-align: center;
+    box-shadow: 0px 3px 2px 1px #00131f;
+    background-color: #05283D;
+    padding: 3px;
+    position: relative;
+}
+
+.text-animate h1 {
+    font-size: 25px;
+    font-weight: 700;
+    color: transparent;
+    padding-bottom: 8px;
+    -webkit-text-stroke: .7px var(--main-color);
+    background-image: -webkit-linear-gradient(var(--main-color));
+    background-image: linear-gradient(var(--main-color), var(--main-color));
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-position: 0 0;
+
+}
+
+ .text-animate h1 {
+    animation: homeBgText 6s linear infinite;
+    animation-delay: 2s;
+}
+
+ .text-animate h1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    border-right: 2px solid var(--main-color);
+    z-index: -1;
+}
+.text-animate h3::before {
+    animation: homeCursorText 6s linear infinite;
+    animation-delay: 2s;
+}
+
+@keyframes homeCursorText {
+
+    0%,
+    10%,
+    100% {
+        width: 0;
+    }
+
+    65%,
+    78%,
+    85% {
+        width: 100%;
+        opacity: 1;
+    }
+
+    75%,
+    81% {
+        opacity: 0;
+    }
+}
+@keyframes homeBgText {
+
+    0%,
+    10%,
+    100% {
+        background-position: -33rem 0;
+    }
+
+    65%,
+    85% {
+        background-position: 0 0;
+    }
+}
+
+
+
+.modal-content {
+    padding: 0px 16px 0px 16px;
+}
+
+.modal-footer {
+    text-align: center;
+    font-size: 12px;
+    padding: 3px 3px 8px 3px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40px; /* This will make the container take up the full height of the viewport */
+}
+.container p {
+    margin: 0px;
+}
+
+.label {
+    color: var(--main-color);
+    margin: 0px;
+    font-weight: 150;
+}
+
+.number, .total-number {
+    color: #FFFFFF;
+    font-size: 32px;
+}
+
+.modal-footer a {
+    color: #D8D8D8;
+}

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Popup</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.1/css/boxicons.min.css" />
+  <link rel="stylesheet" href="css/compare.css" type="text/css" />
+  <style>
+    :root {
+      --bg-color: #081b29;
+      --secondary-bg-color: #112e42;
+      --text-color: #e0ffff;
+      --main-color: #00fa9a;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      width: 300px;
+      padding: 15px;
+      border: 1px solid var(--text-color);
+    }
+
+    #container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid var(--main-color);
+      border-radius: 5px;
+      background-color: var(--secondary-bg-color);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--text-color);
+      padding: 10px;
+      background-color: var(--secondary-bg-color);
+    }
+
+    p {
+      align-items: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--text-color);
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid var(--main-color);
+      border-radius: 5px;
+      background-color: var(--secondary-bg-color);
+      color: var(--text-color);
+    }
+
+    button {
+      background-color: var(--main-color);
+      color: var(--bg-color);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 200px;
+      margin: 20px auto;
+      /* Updated this line */
+      display: block;
+      /* Added this line */
+    }
+
+    button:hover {
+      background-color: var(--secondary-bg-color);
+      color: var(--main-color);
+    }
+
+    #results {
+      margin-top: 20px;
+    }
+
+    .result {
+      margin-bottom: 10px;
+      margin-left: 10px;
+      padding: 10px;
+      border: 1px solid var(--main-color);
+      border-radius: 5px;
+      background-color: var(--secondary-bg-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .result h3 {
+      margin-top: 0;
+      color: var(--text-color);
+    }
+
+    .prices-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .prices-container .result {
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    .back_button {
+      font-size: 2.4rem;
+      color: var(--main-color);
+      /* Changed from --bg-color to --main-color */
+      transition: 0.5s;
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      z-index: 1;
+      text-decoration: none;
+    }
+
+    .back_button::before {
+      content: "";
+      position: absolute;
+      margin-top: 2px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 85%;
+      border-radius: 5px;
+      background: var(--main-color);
+      transform: scaleX(0);
+      transition: 0.5s;
+      z-index: -1;
+    }
+
+    .back_button:hover {
+      color: var(--bg-color);
+      /* Changed from --main-color to --bg-color */
+    }
+
+    .back_button:hover::before {
+      transform: scaleX(1);
+    }
+
+    .loading-indicator {
+      border: 8px solid var(--secondary-bg-color);
+      border-top: 8px solid var(--main-color);
+      border-radius: 50%;
+      width: 20px;
+      /* Size of the loading indicator */
+      height: 20px;
+      /* Size of the loading indicator */
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+      /* Centering */
+    }
+
+    .text-animate h3::before {
+      animation: homeCursorText 6s linear infinite;
+      animation-delay: 2s;
+    }
+
+    @keyframes homeCursorText {
+
+      0%,
+      10%,
+      100% {
+        width: 0;
+      }
+
+      65%,
+      78%,
+      85% {
+        width: 100%;
+        opacity: 1;
+      }
+
+      75%,
+      81% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* animate */
+
+    .text-animate {
+      position: relative;
+
+    }
+
+    .text-animate h3 {
+      font-size: 25px;
+      font-weight: 700;
+      color: transparent;
+      -webkit-text-stroke: .7px var(--main-color);
+      background-image: -webkit-linear-gradient(var(--main-color));
+      background-image: linear-gradient(var(--main-color), var(--main-color));
+      background-repeat: no-repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      background-position: 0 0;
+      text-align: center;
+
+    }
+
+    .text-animate h3 {
+      animation: homeBgText 6s linear infinite;
+      animation-delay: 2s;
+    }
+
+    .text-animate h3::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      border-right: 2px solid var(--main-color);
+      z-index: -1;
+    }
+
+    @keyframes homeBgText {
+
+      0%,
+      10%,
+      100% {
+        background-position: -33rem 0;
+      }
+
+      65%,
+      85% {
+        background-position: 0 0;
+      }
+    }
+  </style>
+  <!-- Include your JavaScript code from an external file -->
+</head>
+
+<body>
+  <a class="back_button" href="popup.html"><i class="bx bx-left-arrow-alt"></i></a>
+  <div class="text-animate">
+    <h3>Compare Prices</h3>
+  </div>
+
+  <button id="compareButton">Compare Prices</button>
+  <div id="loadingIndicator" class="loading-indicator" style="display: none;"></div>
+
+  <div id="results">
+    <div class="prices-container">
+      <div class="result">
+        <h3>Amazon</h3>
+        <p><!-- Insert Amazon price here --></p>
+      </div>
+      <div class="result">
+        <h3>Flipkart</h3>
+        <p><!-- Insert Flipkart price here --></p>
+      </div>
+    </div>
+    <div class="result">
+      <h3>Price Difference</h3>
+      <p><!-- Insert price difference here --></p>
+    </div>
+    <div class="result">
+      <h3 class="compare">Comparison Result</h3>
+      <p><!-- Insert comparison result here --></p>
+    </div>
+  </div>
+  <script src="./compare.js"></script>
+  <script src="firebase/crypto-js.min.js"></script>
+</body>
+
+</html>

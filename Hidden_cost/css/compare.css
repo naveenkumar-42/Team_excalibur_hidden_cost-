@@ -1,0 +1,122 @@
+:root {
+  --bg-color: #081b29;
+  --secondary-bg-color: #112e42;
+  --text-color: #E0FFFF;
+  --main-color: #00FA9A;
+}
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  width: 300px;
+}
+
+#container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid var(--main-color);
+  border-radius: 5px;
+  background-color: var(--secondary-bg-color);
+}
+
+h1 {
+  text-align: center;
+  color: var(--text-color);
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid var(--main-color);
+  border-radius: 5px;
+  background-color: var(--secondary-bg-color);
+  color: var(--text-color);
+}
+
+button {
+  background-color: var(--main-color);
+  color: var(--bg-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background-color: var(--secondary-bg-color);
+  color: var(--main-color);
+}
+
+#results {
+  margin-top: 20px;
+}
+
+.result {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid var(--main-color);
+  border-radius: 5px;
+  background-color: var(--secondary-bg-color);
+}
+
+.result h3 {
+  margin-top: 0;
+  color: var(--text-color);
+}
+
+.prices-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.prices-container .result {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.back_button {
+  font-size: 2.4rem;
+  color: var(--main-color);
+  /* Changed from --bg-color to --main-color */
+  transition: .5s;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  z-index: 1;
+  text-decoration: none;
+}
+
+.back_button::before {
+  content: '';
+  position: absolute;
+  margin-top: 2px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 85%;
+  border-radius: 5px;
+  background: var(--main-color);
+  transform: scaleX(0);
+  transition: .5s;
+  z-index: -1;
+}
+
+.back_button:hover {
+  color: var(--bg-color);
+  /* Changed from --main-color to --bg-color */
+}
+
+.back_button:hover::before {
+  transform: scaleX(1);
+}
