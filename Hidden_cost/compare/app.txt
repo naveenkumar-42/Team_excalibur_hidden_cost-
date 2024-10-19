@@ -9,6 +9,7 @@ from flask_cors import CORS
 app = Flask(__name__)  
 CORS(app)
 
+
 def get_flipkart_price(product_titles):
     flipkart_data = []
     
