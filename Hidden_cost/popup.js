@@ -1,19 +1,24 @@
 // popup.js
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Check if user is logged in
+document.addEventListener('DOMContentLoaded', async function () {
     const user = JSON.parse(localStorage.getItem('user'));
     const welcomeMessage = document.getElementById('welcome-message');
     const logoutButton = document.getElementById('logout-button');
 
     if (user) {
-        const username = user.email.split('@')[0];
-        welcomeMessage.textContent = `Hi 🙋‍♂️, ${username}`; // Assuming user.email contains the user's email
+        // Fetch username from Firestore using the email stored in localStorage
+        const userDoc = await db.collection("users").doc(user.email).get();
+        if (userDoc.exists) {
+            const username = userDoc.data().username; // Fetch the username
+            welcomeMessage.textContent = `Hi 🙋‍♂, ${ username }`; // Display username
+        } else {
+            welcomeMessage.textContent =` Hi 🙋‍♂, User`; // Fallback if no username found
+        }
+
         logoutButton.style.display = 'block';
     } else {
         window.location.href = 'login.html'; // Redirect to login if not logged in
     }
-
     // Logout functionality
     logoutButton.addEventListener('click', function () {
         firebase.auth().signOut().then(() => {
@@ -33,5 +38,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
-

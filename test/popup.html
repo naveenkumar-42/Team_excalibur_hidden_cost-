@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="./css/popup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <h1 class="heading">Welcome to our Extension</h1>
+    <div id="user-info">
+        <p id="welcome-message"></p>
+    </div>
+    <p>This extension empowers you to recognize and avoid deceptive design techniques known as dark patterns commonly found on e-commerce websites.</p>
+
+    <div class="btn-box">
+        <a class="btn" href="hiddencost.html">Identify Hidden Costs</a>
+        <a id="submitUrl" class="btn">Darkpattern Detector</a>
+        <a class="btn" href="./compare.html">Compare the Product</a>
+        <a class="btn" href="./darkhighlight.html">Highlight Deceptive Tactics</a>
+    </div>
+
+    <div class="centered-btn">
+        <a class="btn" id="chatbot" href="chatbot.html">Chatter bot</a>
+    </div>
+
+    <footer class="footer">
+        <p>
+            Visit our Website --><span><a target="_blank" href="https://sabarishcodewizard.github.io/DPBH-Web-Application/">&#128516;</a></span>
+        </p>
+        <div class="footer-right">
+            <button class="btn" ><i class="fas fa-comment-alt"></i><span>Feedback</span></button>
+            <button class="logout-btn" id="logout-button"><i class="fas fa-sign-out-alt"></i><span>Logout</span></button>
+        </div>
+    </footer>
+
+</body>
+<script src="firebase/firebase-app-compat.js"></script>
+<script src="firebase/firebase-auth-compat.js"></script>
+<script src="firebase/firebase-firestore-compat.js"></script>
+<script src="loadEnv.js"></script>
+<script src="firebase-init.js"></script>
+<script src="auth.js"></script>
+<script src="popup.js"></script>
+<script src="firebase/crypto-js.min.js"></script>
+</html>

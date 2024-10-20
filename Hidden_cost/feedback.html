@@ -6,24 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback</title>
     <link rel="stylesheet" href="./css/popup.css">
+    <link rel="stylesheet" href="./css/feedback.css">
 </head>
 
 <body>
     <h1 class="heading">Feedback</h1>
     <p>We value your feedback! Please let us know what you think about our extension.</p>
 
-    <form action="https://formspree.io/f/xvgpadov" method="POST" id="feedbackForm">
+    <form action="https://formspree.io/f/moqzggqb" method="POST" id="feedbackForm">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Your Name" required><br><br>
+        <div class="box">
+            <input type="text" id="name" name="Name" required />
+            <span>Username</span>
+          </div>
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Your Email" required><br><br>
+        <div class="box">
+        <input type="email" id="email" name="Email" required />
+        <span>Email</span>
+      </div>
 
         <label for="feedback">Your Feedback:</label><br>
-        <textarea id="feedback" name="feedback" rows="5" cols="40" placeholder="Write your feedback here..."
-            required></textarea><br><br>
-
-        <button type="submit" class="btn">Submit</button>
+        <div class="box">
+        <textarea style="background-color:#081b29;color: aliceblue ;" id="feedback" name="feedback" rows="5" cols="40" placeholder="Write your feedback here..." required></textarea><br><br>
+        </div>
+        <button class="a" type="submit">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Submit</button>
+        </form>
     </form>
 
     <footer class="footer">
@@ -31,33 +44,6 @@
     </footer>
 
     <script src="feedback.js"></script>
-    <style>
-        form {
-            margin: 20px;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
     <script src="firebase/crypto-js.min.js"></script>
 </body>
 

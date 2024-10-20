@@ -8,19 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <link rel="stylesheet" href="./css/popup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 </head>
 
 <body>
-    <div id="user-info">
-        <p id="welcome-message"></p>
-        <button id="logout-button" style="display:none;">Logout</button>
-    </div>
     <h1 class="heading">Welcome to our Extension</h1>
+    <div id="user-info" class="text-animate">
+        <h3 id="welcome-message"></h3>
+    </div>
     <p>This extension empowers you to recognize and avoid deceptive design techniques known as dark patterns commonly
         found on e-commerce websites.</p>
 
-    <div class="btn-box">
+    <div class="btn-box">   
         <div class="up_box">
             <a class="btn" href="hiddencost.html">Identify Hidden Costs</a>
             <a id="submitUrl" style="height: 50px;" class="btn">Darkpattern Detector</a>
@@ -36,24 +36,19 @@
             bot</a>
     </div>
 
-    <!-- Additional Content -->
-    <!-- <div class="additional-content">
-        <h2>About Dark Patterns</h2>
-        <p>Dark patterns are manipulative user interface designs crafted to trick users into doing things they might not
-            want to do, such as making purchases or signing up for subscriptions unknowingly.</p>
-        <p>Our extension helps you stay informed and make informed decisions while shopping online, protecting you from
-            falling victim to these unethical practices.</p>
-    </div> -->
 
     <footer class="footer">
-
-        <a class="btn" style="height: 50px;width: 100px;margin-top:-10px;margin-right: 15px;"
-            href="feedback.html">Feedback</a>
         <p>
             Visit our Website --><span><a target="_blank"
                     href="https://sabarishcodewizard.github.io/DPBH-Web-Application/">&#128516;</a></span>
         </p>
+
+        <div class="footer-right">
+        <button class="btn"><i class="fas fa-comment-alt"></i><a href="feedback.html" style="text-decoration: none; color: azure;"><span>Feedback</span></a></button>
+        <button class="logout-btn" id="logout-button"  id="logout-button"><i style="margin-right: 10px;" class="fas fa-sign-out-alt"></i><span>Logout</span></button>
+        </div>
     </footer>
+
 </body>
 <script src="firebase/firebase-app-compat.js"></script>
 <script src="firebase/firebase-auth-compat.js"></script>

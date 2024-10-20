@@ -22,7 +22,7 @@
         "default_icon": {
             "128": "/images/default.png"
         },
-        "default_popup": "login.html"
+        "default_popup": "popup.html"
     },
     "content_scripts": [
         {

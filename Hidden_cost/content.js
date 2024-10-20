@@ -58,55 +58,6 @@ function highlightAmazonProductDetails() {
     'amazonComparePrice': amazonComparePriceArray,
     'discountDifference': discountDifferenceArray
   });
-
-  function updateStoredValues() {
-    chrome.storage.local.get(['deliveryAmount', 'itemsAmount', 'orderTotalAmount', 'promotionAppliedAmount', 'totalAmount'], function (result) {
-      document.getElementById('deliveryAmount').textContent = 'Delivery Amount: ₹' + (result.deliveryAmount || 0).toFixed(2);
-      document.getElementById('itemsAmount').textContent = 'Items Amount: ₹' + (result.itemsAmount || 0).toFixed(2);
-      document.getElementById('orderTotalAmount').textContent = 'Order Total Amount: ₹' + (result.orderTotalAmount || 0).toFixed(2);
-      document.getElementById('promotionAppliedAmount').textContent = 'Promotion Applied Amount: ₹' + (result.promotionAppliedAmount || 0).toFixed(2);
-      document.getElementById('totalAmount').textContent = 'Total Amount: ₹' + (result.totalAmount || 0).toFixed(2);
-
-      const deliveryAmount = parseFloat(result.deliveryAmount) || 0;
-      const itemsAmount = parseFloat(result.itemsAmount) || 0;
-      const orderTotalAmount = parseFloat(result.orderTotalAmount) || 0;
-      const promotionAppliedAmount = parseFloat(result.promotionAppliedAmount) || 0;
-      const totalAmount = parseFloat(result.totalAmount) || 0;
-
-      const updatedTotalAmount = totalAmount - deliveryAmount;
-
-      document.getElementById('totalAmount').textContent = 'Total Amount: ₹' + updatedTotalAmount.toFixed(2);
-    });
-  }
-
-  chrome.storage.local.get(['totalAmount', 'amazonProductPrices'], function (result) {
-    document.getElementById('totalAmount').textContent = 'Total Amount: ₹' + (result.totalAmount || 0).toFixed(2);
-    const totalAmount = parseFloat(result.totalAmount) || 0;
-    const amazonProductPrices = result.amazonProductPrices || [];
-
-    const updatedPrices = amazonProductPrices.map(price => {
-      return price - totalAmount;
-    });
-
-    chrome.storage.local.get(['totalAmount', 'discountDifference'], function (result) {
-      document.getElementById('totalAmount').textContent = 'Total Amount: ₹' + (result.totalAmount || 0).toFixed(2);
-
-      const discountDifference = result.discountDifference || [];
-      const sumDiscountDifference = discountDifference.reduce((acc, cur) => acc + parseFloat(cur), 0);
-
-      const totalAmount = parseFloat(result.totalAmount) || 0;
-      const newTotalAmount = totalAmount + sumDiscountDifference;
-
-      document.getElementById('totalAmount').textContent = 'Total Amount: ₹' + newTotalAmount.toFixed(2);
-
-      chrome.storage.local.set({
-        'AmazonProductFinalPrices': updatedPrices,
-        'amazontotalHiddenCost': newTotalAmount
-      });
-    });
-  });
-
-  updateStoredValues();
 }
 
 
@@ -183,7 +134,7 @@ function highlightAjioProductDetails() {
     }
   }
 
-   let offerPricesArray = Array.from(fullPrices).map((price, index) => {
+  let offerPricesArray = Array.from(fullPrices).map((price, index) => {
     let fullPriceValue = parseFloat(price.textContent.replace(/,/g, '').replace('₹', '').split('₹')[0]);
     let discountPercentage = parseFloat(discountPercentages[index]?.textContent.replace(/,/g, '').replace('-', '').replace('%', ''));
     let offerPrice = fullPriceValue - (fullPriceValue * discountPercentage / 100);
@@ -224,8 +175,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     } else if (url.includes('flipkart')) {
       highlightFlipkartProductDetails();
     } else if (url.includes('ajio')) {
-    highlightAjioProductDetails();
-  }
+      highlightAjioProductDetails();
+    }
     chrome.storage.local.set({ isHighlighting: isHighlighting });
   }
 });
@@ -237,7 +188,7 @@ chrome.storage.local.get(['isHighlighting'], function (result) {
     highlightAmazonProductDetails();
   } else if (url.includes('flipkart')) {
     highlightFlipkartProductDetails();
-  }  else if (url.includes('ajio')) {
+  } else if (url.includes('ajio')) {
     highlightAjioProductDetails();
   }
 });
@@ -248,7 +199,7 @@ window.addEventListener('load', function () {
     highlightAmazonProductDetails();
   } else if (url.includes('flipkart')) {
     highlightFlipkartProductDetails();
-  }  else if (url.includes('ajio')) {
+  } else if (url.includes('ajio')) {
     highlightAjioProductDetails();
   }
 });

@@ -1,0 +1,187 @@
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: #E0FFFF solid 2px;
+  padding-right: 10px;
+  padding-left: 10px;
+  height: auto;
+  width: 350px;
+}
+.auth-container{
+    text-align: start;
+}
+
+form {
+  margin: 20px;
+}
+
+.head{
+  text-align: center;
+  padding: 12px;
+  margin-top: 20px;
+  color: var(--main-color);
+  background-color: var(--secondary-bg-color);
+}
+
+.glitter{
+  margin: 0;
+  z-index: 1;
+  font-family: 'Teko', sans-serif;
+  font-size: 25px;
+  text-transform: uppercase;
+  animation: glow 1s ease-in-out infinite alternate;
+  text-align: center;
+  text-shadow: #00FA9A;
+}
+
+.a{
+	transform: translate(-50%, -50%);
+	color: var(--text-color);
+  padding: 10px 30px;
+  background-color: var(--secondary-bg-color);
+  margin-top: 15px;
+  margin-left: 50%;
+	overflow: hidden;
+	font-size: 30;
+	text-decoration: none;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	font-weight: bold;
+	box-shadow: 0 20px 50px rgba(1, 255, 234, 0.05)
+}
+.a:before{
+	position: absolute;
+	width: 50%;
+	top: 2px;
+	left: 2px;
+	bottom: 2px;
+	content: '';
+	background: rgb(142 255 240 / 10%);
+}
+.a span:nth-child(1) {
+	position: absolute;
+	width: 100%;
+	height: 3px;
+	top: 0;
+	left: 0;
+	background: linear-gradient(to right, #00FA9A,#112e42);
+	animation: animate1 2s linear infinite;
+}
+
+@keyframes animate1{
+	0%{
+		transform: translateX(-100%);
+	}
+	100%{
+		transform: translateX(100%);
+	}
+}
+.a span:nth-child(2) {
+	position: absolute;
+	width: 3px;
+	height: 100%;
+	top: 0;
+	right: 0;
+	background: linear-gradient(to bottom, #002b9d, #34ffea);
+	animation: animate2 2s linear infinite;
+	animation-delay: 1s;
+}
+@keyframes animate2{
+	0%{
+		transform: translateY(-100%);
+	}
+	100%{
+		transform: translateY(100%);
+	}
+}
+.a span:nth-child(3) {
+	position: absolute;
+	width: 100%;
+	height: 3px;
+	left: 0;
+	bottom: 0;
+	background: linear-gradient(to left, #002b9d, #34ffea);
+	animation: animate3 2s linear infinite;
+}
+@keyframes animate3{
+	0%{
+		transform: translateX(100%);
+	}
+	100%{
+		transform: translateX(-100%);
+	}
+}
+.a span:nth-child(4) {
+	position: absolute;
+	width: 3px;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: linear-gradient(to top, #002b9d, #34ffea);
+	animation: animate4 2s linear infinite;
+	animation-delay: 1s;
+}
+@keyframes animate4{
+	0%{
+		transform: translateY(100%);
+	}
+	100%{
+		transform: translateY(-100%);
+	}
+}
+
+.login-form{
+  align-items: center;
+  text-align: center;
+}
+
+.reg{
+  font-size: 12px;
+  margin-left:21px ;
+}
+
+.forgot-password-container{
+  font-size: 10px;
+  text-align: start;
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid #ccc;
+  color: #555;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 80%;
+  margin-left: 25px;
+  }
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.google-btn:hover {
+  background-color: #f1f1f1;
+}
+
+.password-container {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 40px;
+  top: 53%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.toggle-password img {
+  width: 25px;
+  height: 25px;
+}

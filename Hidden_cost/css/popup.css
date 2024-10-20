@@ -29,11 +29,9 @@ body {
   text-align: center;
   margin-top: 40px;
   padding: 12px;
-  margin-bottom: 40px;
   color: var(--main-color);
   background-color: var(--secondary-bg-color);
 }
-
 
 .button:hover {
   background-color: var(--secondary-bg-color);
@@ -72,6 +70,7 @@ body {
   text-decoration: none;
   margin: 10px;
   margin-left: 0px;
+  text-decoration: none;
 }
 
 .btn-box .btn:nth-child(2),
@@ -125,10 +124,6 @@ h2 {
   padding: 10px;
 }
 
-.footer {
-  text-align: end;
-}
-
 .up_box {
   margin: 10px;
   padding: 10px;
@@ -176,41 +171,222 @@ a {
 
 /* Logout Button Styling */
 #logout-button {
-  display: none;
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
   color: white;
   background-color: #FF4500;
-  /* Red-orange color */
   border: none;
   border-radius: 5px;
   cursor: pointer;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #logout-button:hover {
   background-color: #e34200;
-  /* Slightly darker red-orange */
-  transform: translateY(-2px);
 }
 
 #logout-button:active {
   background-color: #c13b00;
-  /* Even darker red-orange */
   transform: translateY(0);
 }
 
-/* Center the logout button */
 #user-info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  padding: 5px;
 }
 
 #welcome-message {
   font-size: 18px;
   margin-bottom: 10px;
+}
+
+/* animate */
+.text-animate {
+  position: relative;
+}
+
+.text-animate h3 {
+  font-size: 25px;
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: .7px var(--main-color);
+  background-image: -webkit-linear-gradient(var(--main-color));
+  background-image: linear-gradient(var(--main-color), var(--main-color));
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-position: 0 0;
+  text-align: center;
+  animation: homeBgText 6s linear infinite;
+  animation-delay: 1.45s;
+}
+
+.text-animate h3::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 80%;
+  margin-top: 10px;
+  border-right: 2px solid var(--main-color);
+  z-index: -1;
+  animation: homeCursorText 6s linear infinite;
+  animation-delay: 2s;
+}
+
+@keyframes homeBgText {
+
+  0%,
+  10%,
+  100% {
+    background-position: -33rem 0;
+  }
+
+  65%,
+  85% {
+    background-position: 0 0;
+  }
+}
+
+@keyframes homeCursorText {
+
+  0%,
+  10%,
+  100% {
+    width: 0;
+  }
+
+  65%,
+  85% {
+    width: 100%;
+    opacity: 1;
+  }
+
+  75%,
+  81% {
+    opacity: 0;
+  }
+}
+
+
+
+
+.box {
+  width: 100%;
+  margin: 10px 10px 20px 10px;
+  position: relative;
+}
+
+.box input {
+  width: 80%;
+  height: 25px;
+  padding: 10px;
+  border: 1px solid #ffffff40;
+  background-color: var(--bg-color);
+  border-radius: 5px;
+  outline: none;
+  color: #fff;
+  font-size: 1em;
+}
+
+.box span {
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  transition: 0.2s;
+}
+
+.box input:valid~span,
+.box input:focus~span {
+  color: var(--main-color);
+  transform: translateX(10px) translateY(-30px);
+  font-size: 0.75em;
+  padding: 0 5px;
+  background-color: var(--bg-color);
+  border-left: 1px solid var(--main-color);
+  border-right: 1px solid var(--main-color);
+}
+
+.box input:valid,
+.box input:focus {
+  border: 1px solid var(--main-color);
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: var(--secondary-bg-color);
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.footer-right {
+  display: flex;
+  flex-direction: row;
+  /* Align items in a row */
+  align-items: center;
+  gap: 10px;
+  /* Add space between buttons */
+  align-items: center;
+  text-align: center;
+}
+
+.footer-right .btn,
+.footer-right .logout-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: width 0.3s ease, padding 0.3s ease;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 40px;
+  text-decoration: none;
+}
+
+.footer-right .btn i,
+.footer-right .logout-btn i {
+  margin-right: 5px;
+}
+
+.footer-right .btn:hover,
+.footer-right .logout-btn:hover {
+  background-color: #2e6f31;
+  width: 120px;
+  padding: 10px 20px;
+}
+
+.footer-right .btn span,
+.footer-right .logout-btn span {
+  display: none;
+  margin-left: 5px;
+}
+
+.footer-right .btn:hover span,
+.footer-right .logout-btn:hover span {
+  display: inline;
+}
+
+.footer-right .logout-btn {
+  background-color: #f44336;
+}
+
+.footer-right .logout-btn:hover {
+  background-color: #d32f2f;
 }

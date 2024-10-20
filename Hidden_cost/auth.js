@@ -23,6 +23,46 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+
+    // Toggle password visibility for login
+    const togglePasswordLogin = document.getElementById('toggle-password');
+    const passwordFieldLogin = document.getElementById('password');
+    const eyeIconLogin = document.getElementById('eye-icon-login');
+
+    if (togglePasswordLogin) {
+        togglePasswordLogin.addEventListener('click', function () {
+            const isPasswordVisible = passwordFieldLogin.getAttribute('type') === 'password';
+            passwordFieldLogin.setAttribute('type', isPasswordVisible ? 'text' : 'password');
+            eyeIconLogin.src = isPasswordVisible ? 'eye-closed-icon.png' : 'eye-icon.png';
+        });
+    }
+
+    // Toggle password visibility for register
+    const togglePasswordRegister = document.getElementById('toggle-register-password');
+    const passwordFieldRegister = document.getElementById('register-password');
+    const eyeIconRegister = document.getElementById('eye-icon-register');
+
+    if (togglePasswordRegister) {
+        togglePasswordRegister.addEventListener('click', function () {
+            const isPasswordVisible = passwordFieldRegister.getAttribute('type') === 'password';
+            passwordFieldRegister.setAttribute('type', isPasswordVisible ? 'text' : 'password');
+            eyeIconRegister.src = isPasswordVisible ? 'eye-closed-icon.png' : 'eye-icon.png';
+        });
+    }
+
+    // Toggle confirm password visibility
+    const toggleConfirmPassword = document.getElementById('toggle-confirm-password');
+    const confirmPasswordField = document.getElementById('confirm-password');
+    const eyeIconConfirm = document.getElementById('eye-icon-confirm');
+
+    if (toggleConfirmPassword) {
+        toggleConfirmPassword.addEventListener('click', function () {
+            const isPasswordVisible = confirmPasswordField.getAttribute('type') === 'password';
+            confirmPasswordField.setAttribute('type', isPasswordVisible ? 'text' : 'password');
+            eyeIconConfirm.src = isPasswordVisible ? 'eye-closed-icon.png' : 'eye-icon.png';
+        });
+    }
+    
     // Google sign-in
     const googleSignin = document.getElementById('google-signin');
     if (googleSignin) {
