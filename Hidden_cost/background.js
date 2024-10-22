@@ -20,6 +20,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         sendResponse({ success: true });
       }
     });
+    
   } else if (request.action === 'backButtonClicked') {
     chrome.browserAction.setIcon({path: 'images/default.png'}, function() {
       if (!isHighlighting) {
