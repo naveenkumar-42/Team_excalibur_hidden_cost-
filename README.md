@@ -1,4 +1,4 @@
-Identify Hidden Costs and Dark Patterns
+<h1>Identify Hidden Costs and Dark Patterns</h1>
 Abstract
 This project enhances transparency in online shopping by empowering consumers with tools to uncover hidden costs, identify dark patterns, and analyze deceptive design techniques. The solution, composed of a Chrome Extension and Web Application, addresses these issues through the following core features:
 
