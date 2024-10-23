@@ -50,9 +50,9 @@
 
 <h2>Team</h2>
 <ul>
-    <li><strong>Mugundhan K V:</strong> Backend Developer</li>
+    <li><strong>Mugundhan K V:</strong> Frontend Developer</li>
     <li><strong>Sabarish R:</strong> Backend Developer</li>
-    <li><strong>Naveen Kumar P:</strong> Backend Developer</li>
+    <li><strong>Naveen Kumar P:</strong> Frontend Developer</li>
 </ul>
 
 <h2>License</h2>
