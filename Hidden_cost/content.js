@@ -68,7 +68,7 @@ function highlightFlipkartProductDetails() {
   const discountPercentages = document.querySelectorAll('#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div:nth-child(2) > div > div.dyC4hf > div.CEmiEU > div > div._3Ay6Sb._31Dcoz, #container > div > div._1Er18h > div > div > div:nth-child(1) > div > div:nth-child(3) > div > div._2nQDXZ > div._3fSRat > span.dML6Ak');
   const finalPrices = document.querySelectorAll('#container > div > div._1Er18h > div > div._1YokD2._2GoDe3.col-12-12 > div._1YokD2._3Mn1Gg.col-4-12._78xt5Y > div._1AtVbE.col-12-12 > div > div > div > div._3LxTgx > div > div.z4Ha90 > span > div > div > div.z4Ha90');
 
-  highlightElements(productPrices, '#4F6F52', '2px 5px', '3px', 'bold');
+  highlightElements(productPrices, '#4F6F52', '4px 5px', '3px', 'bold');
   highlightElements(productTitles, '#BFD8AF', '2px 5px', '3px', 'bold');
   highlightElements(fullPrices, '#D2E3C8', '2px 5px', '3px', 'bold');
   highlightElements(discountPercentages, '#D4E7C5', '2px 5px', '3px', 'bold');
