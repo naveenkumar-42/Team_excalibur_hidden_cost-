@@ -96,3 +96,8 @@ def compare_prices():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5010)
+
+
+
+
+#Perfomance -- 212ms 

@@ -34,7 +34,7 @@ function highlightAmazonProductDetails() {
     let fullPriceValue = parseFloat(price.textContent.replace(/,/g, '').replace('₹', '').split('₹')[0]);
     let discountPrice = parseFloat(discountPrices[index]?.textContent.replace(/,/g, '').replace('-', '').replace('%', '')) / 100;
     let amazonPriceDifference = fullPriceValue - (fullPriceValue * discountPrice);
-    return amazonPriceDifference;
+    return parseFloat(amazonPriceDifference);
   });
 
   let amazonComparePriceArray = amazonPriceDifferenceArray.map((amazonPriceDifference, index) => {
@@ -54,7 +54,7 @@ function highlightAmazonProductDetails() {
     'amazonDiscountPrices': Array.from(discountPrices).map(price => parseFloat(price.textContent.replace(/,/g, '').replace('-', ''))),
     'amazonFullPrice': Array.from(fullPrice).map(price => parseFloat(price.textContent.replace(/,/g, '').replace('₹', '').split('₹')[0])),
     'amazonProductTotal': Array.from(productTotal).map(total => total.textContent),
-    'amazonPriceDifference': amazonPriceDifferenceArray,
+    'amazonPriceDifference': amazonPriceDifferenceArray.toFixed(2),
     'amazonComparePrice': amazonComparePriceArray,
     'discountDifference': discountDifferenceArray
   });
