@@ -10,10 +10,11 @@ body {
     padding: 20px;
     background-color: var(--bg-color);
     color: var(--text-color);
+    border: solid 2px var(--text-color);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.container{
+.container {
     border: solid 2px var(--text-color);
 }
 
@@ -150,12 +151,12 @@ button:hover {
 
 }
 
- .text-animate h3 {
+.text-animate h3 {
     animation: homeBgText 6s linear infinite;
     animation-delay: 2s;
 }
 
- .text-animate h3::before {
+.text-animate h3::before {
     content: '';
     position: absolute;
     top: 0;
@@ -182,7 +183,8 @@ button:hover {
 
 .back_button {
     font-size: 2.4rem;
-    color: var(--main-color); /* Changed from --bg-color to --main-color */
+    color: var(--main-color);
+    /* Changed from --bg-color to --main-color */
     transition: .5s;
     position: relative;
     display: inline-block;
@@ -207,7 +209,8 @@ button:hover {
 }
 
 .back_button:hover {
-    color: var(--bg-color); /* Changed from --main-color to --bg-color */
+    color: var(--bg-color);
+    /* Changed from --main-color to --bg-color */
 }
 
 .back_button:hover::before {
@@ -221,22 +224,22 @@ button:hover {
     font-size: 2rem;
     font-weight: bold;
     padding-bottom: 10px;
-  }
+}
 
-  .modal-content {
+.modal-content {
 
     padding: 30px;
     margin-top: 30px;
     border-radius: 5px;
-  }
+}
 
-  .number {
+.number {
     font-size: 1.2rem;
     font-weight: bold;
     margin-top: 15px;
     padding: 5px;
     border: #081b29 solid 2px;
-  }
+}
 
 .analyze-button {
     background-color: var(--main-color);
@@ -251,10 +254,58 @@ button:hover {
     margin-left: 55px;
     margin-top: 50px;
     padding-bottom: 50px;
-  }
+}
 
 .analyze-button:hover {
     background-color: var(--bg-color);
     color: var(--main-color);
-    border:solid var(--main-color);
-  }
+    border: solid var(--main-color);
+}
+
+.loader {
+    display: none;
+    border: 8px solid rgba(255, 255, 255, 0.2);
+    border-top: 8px solid var(--main-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-left: 37%;
+    margin-top: 10px;
+}
+
+.text-animate h3::before {
+    animation: homeCursorText 6s linear infinite;
+    animation-delay: 2s;
+}
+
+@keyframes homeCursorText {
+
+    0%,
+    10%,
+    100% {
+        width: 0;
+    }
+
+    65%,
+    78%,
+    85% {
+        width: 100%;
+        opacity: 1;
+    }
+
+    75%,
+    81% {
+        opacity: 0;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
