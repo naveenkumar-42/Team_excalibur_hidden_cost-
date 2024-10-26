@@ -97,7 +97,6 @@ function displayComparison(data) {
     var difference = Math.abs(parseFloat(amazonPrices[i]) - parseFloat(flipkartInfo.price));
     priceDifference.innerHTML = "<h3>Price Difference</h3><p>" + difference + "</p>";
     resultsDiv.appendChild(priceDifference);
-
     // Display comparison result
     var comparisonMessage = document.createElement("div");
     comparisonMessage.classList.add("result");
