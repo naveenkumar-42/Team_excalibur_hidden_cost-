@@ -14,7 +14,6 @@ CORS(app)
 def get_flipkart_price(product_titles):
     flipkart_data = []
     
-    # Specify the path to the Edge WebDriver if not in PATH
     driver = webdriver.Edge()  # Edge WebDriver initialization
     
     for product_title in product_titles:
